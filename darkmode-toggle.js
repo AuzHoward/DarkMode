@@ -9,9 +9,13 @@
     return window.getComputedStyle(el)[prop];
   }
 
-  // Utility: Simple color transformation (light <-> dark)
+  // Utility: Check if a color is neutral (gray scale)
+  function isNeutral(r, g, b, threshold = 10) {
+    return Math.abs(r - g) < threshold && Math.abs(g - b) < threshold && Math.abs(b - r) < threshold;
+  }
+
+  // Utility: Simple color transformation (invert only neutral colors)
   function transformColor(color) {
-    // Only handle rgb/rgba/hex for MVP
     if (!color) return color;
     let r, g, b, a = 1;
     if (color.startsWith('rgb')) {
@@ -28,11 +32,16 @@
     } else {
       return color; // Named colors, gradients, etc.
     }
-    // Invert color for dark mode
-    r = 255 - r;
-    g = 255 - g;
-    b = 255 - b;
-    return `rgb(${r}, ${g}, ${b})`;
+    // Only invert if neutral (gray scale)
+    if (isNeutral(r, g, b)) {
+      r = 255 - r;
+      g = 255 - g;
+      b = 255 - b;
+      return `rgb(${r}, ${g}, ${b})`;
+    } else {
+      // Leave accent/brand colors unchanged
+      return color;
+    }
   }
 
   // Traverse DOM and apply dark mode styles
