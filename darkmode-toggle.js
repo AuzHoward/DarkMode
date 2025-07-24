@@ -41,6 +41,10 @@
   toggleBtn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
   toggleBtn.style.fontSize = '16px';
   toggleBtn.style.fontFamily = 'inherit';
+  toggleBtn.style.display = 'flex';
+  toggleBtn.style.alignItems = 'center';
+  toggleBtn.style.justifyContent = 'center';
+  toggleBtn.style.textAlign = 'center';
   toggleBtn.addEventListener('click', toggleDarkMode);
   document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(toggleBtn);
