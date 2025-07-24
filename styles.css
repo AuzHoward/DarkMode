@@ -1,0 +1,103 @@
+body {
+  background: linear-gradient(to bottom, #003366 0%, #004080 30%, #0066cc 60%, #ff6600 85%, #800020 100%); /* Twilight sky gradient - mostly blue with warm colors at bottom */
+  color: #111;
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+.center-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 10vh;
+  text-align: left;
+  gap: 10px;
+}
+.moon-img {
+  width: 600px;
+  max-width: 100vw;
+  margin-bottom: 0;
+  filter: drop-shadow(0 4px 32px rgba(0,0,0,0.25));
+  transition: filter 0.3s;
+}
+.text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.feature-description {
+  max-width: 700px;
+  margin: 20px auto 0 auto;
+  padding: 0 24px;
+  font-size: 1.6rem;
+  color: inherit;
+  text-align: center;
+  opacity: 0.95;
+}
+.main-title {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin: 0 0 16px 0;
+}
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 32px;
+}
+.cta-btn {
+  background: #222;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  cursor: pointer;
+}
+.cta-btn:hover {
+  background: #444;
+}
+.content-border {
+  border: 2.5px solid currentColor;
+  border-radius: 32px;
+  padding: 20px 40px;
+  margin: 200px auto 0 auto;
+  max-width: 1100px;
+  background: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .center-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+  .moon-img {
+    width: 220px;
+    margin-bottom: 24px;
+  }
+  .text-content {
+    align-items: center;
+  }
+}
+
+/* Dark mode styles */
+body.darkmode {
+  background: #111;
+  color: #fff;
+}
+body.darkmode .cta-btn {
+  background: #fff;
+  color: #111;
+}
+body.darkmode .moon-img {
+  filter: drop-shadow(0 4px 32px rgba(255,255,255,0.10));
+} 
