@@ -156,4 +156,15 @@ body.darkmode .cta-btn {
 }
 body.darkmode .moon-img {
   filter: drop-shadow(0 4px 32px rgba(255,255,255,0.10));
-} 
+}
+
+/* Client's CSS - they add this to their site */
+html.darkmode {
+  background: #111 !important;
+  color: #fff !important;
+}
+
+html.darkmode * {
+  background-color: #111 !important;
+  color: #fff !important;
+}
