@@ -52,11 +52,7 @@
   const toggleThumb = toggleBtn.querySelector('.toggle-thumb');
   toggleThumb.style.width = '60px';
   toggleThumb.style.height = '60px';
-  toggleThumb.style.backgroundColor = 'transparent';
-  toggleThumb.style.backgroundImage = 'url("images/moon2.png")';
-  toggleThumb.style.backgroundSize = 'contain';
-  toggleThumb.style.backgroundRepeat = 'no-repeat';
-  toggleThumb.style.backgroundPosition = 'center';
+  toggleThumb.style.backgroundColor = '#fff';
   toggleThumb.style.borderRadius = '50%';
   toggleThumb.style.transition = 'transform 0.3s';
   toggleThumb.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
