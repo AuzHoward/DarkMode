@@ -1,8 +1,9 @@
-// DarkMode Toggle for Client Websites - Global Banner Version
+// DarkMode Toggle for Template Injection - Single Script for Entire Website
 (function () {
   const STORAGE_KEY = 'darkmode-toggle-enabled';
   let darkModeEnabled = false;
   let originalStyles = new Map();
+  let bannerCreated = false;
 
   // Check saved preference immediately
   function checkSavedPreference() {
@@ -13,8 +14,10 @@
     }
   }
 
-  // Create persistent banner
+  // Create persistent banner (only once per page)
   function createBanner() {
+    if (bannerCreated) return null;
+    
     // Remove existing banner if it exists
     const existingBanner = document.getElementById('darkmode-banner');
     if (existingBanner) {
@@ -38,11 +41,13 @@
     banner.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
     banner.style.fontFamily = 'Arial, sans-serif';
     banner.style.fontSize = '14px';
+    banner.style.boxSizing = 'border-box';
 
     // Add banner text
     const bannerText = document.createElement('span');
     bannerText.textContent = 'Dark Mode';
     bannerText.style.marginRight = '15px';
+    bannerText.style.userSelect = 'none';
     banner.appendChild(bannerText);
 
     // Add toggle button
@@ -77,17 +82,32 @@
 
     // Add banner to page
     document.body.appendChild(banner);
+    bannerCreated = true;
 
     // Adjust page content to account for banner
+    adjustPageContent();
+
+    return toggleBtn;
+  }
+
+  // Adjust page content to prevent banner overlap
+  function adjustPageContent() {
     const body = document.body;
-    const currentPadding = window.getComputedStyle(body).paddingTop;
+    const html = document.documentElement;
     const bannerHeight = '60px';
+    
+    // Check if content needs adjustment
+    const currentPadding = window.getComputedStyle(body).paddingTop;
+    const currentMargin = window.getComputedStyle(body).marginTop;
     
     if (!body.style.paddingTop || parseInt(body.style.paddingTop) < 60) {
       body.style.paddingTop = bannerHeight;
     }
-
-    return toggleBtn;
+    
+    // Also adjust html if needed
+    if (!html.style.paddingTop || parseInt(html.style.paddingTop) < 60) {
+      html.style.paddingTop = bannerHeight;
+    }
   }
 
   // Run immediately if DOM is already loaded
@@ -98,6 +118,13 @@
     checkSavedPreference();
     initToggle();
   }
+
+  // Also run on window load to handle dynamic content
+  window.addEventListener('load', function() {
+    if (!bannerCreated) {
+      initToggle();
+    }
+  });
 
   // Utility: Get computed style property
   function getStyle(el, prop) {
@@ -146,8 +173,8 @@
     
     // Also apply to current page elements
     document.querySelectorAll('*').forEach(el => {
-      // Skip the banner
-      if (el.id === 'darkmode-banner') return;
+      // Skip the banner and its children
+      if (el.id === 'darkmode-banner' || el.closest('#darkmode-banner')) return;
       
       // Save original styles
       if (!originalStyles.has(el)) {
@@ -189,10 +216,12 @@
   function toggleDarkMode() {
     if (darkModeEnabled) {
       removeDarkMode();
-      toggleBtn.classList.remove('active');
+      const toggleBtn = document.querySelector('.toggle-switch');
+      if (toggleBtn) toggleBtn.classList.remove('active');
     } else {
       applyDarkMode();
-      toggleBtn.classList.add('active');
+      const toggleBtn = document.querySelector('.toggle-switch');
+      if (toggleBtn) toggleBtn.classList.add('active');
     }
   }
 
@@ -250,9 +279,11 @@
 
   function initToggle() {
     const toggleBtn = createBanner();
-    // Set initial state based on saved preference
-    if (darkModeEnabled) {
-      toggleBtn.classList.add('active');
+    if (toggleBtn) {
+      // Set initial state based on saved preference
+      if (darkModeEnabled) {
+        toggleBtn.classList.add('active');
+      }
     }
   }
 })(); 
