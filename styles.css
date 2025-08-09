@@ -6,17 +6,7 @@ body {
   min-height: 100vh;
   transition: background 0.3s, color 0.3s;
 }
-.center-content {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: auto;
-  text-align: left;
-  gap: 10px;
-  position: relative;
-  padding-top: 20px;
-}
+
 .cloud-overlay {
   position: absolute;
   top: 10%;
@@ -28,24 +18,34 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  z-index: 2;
+  z-index: 1;
   opacity: 0.8;
   pointer-events: none;
 }
 body.darkmode .cloud-overlay {
   display: none;
 }
+.moon-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
 .moon-img {
   width: 3000px;
   max-width: none;
-  margin-bottom: 0;
   filter: drop-shadow(0 4px 32px rgba(0,0,0,0.25));
   transition: filter 0.3s, opacity 0.3s;
   opacity: 0.4;
-  z-index: 1;
-  position: relative;
-  margin-left: -2400px;
-  margin-top: -400px;
+  position: absolute;
+  left: -1800px;
+  top: 0;
 }
 body.darkmode .moon-img {
   opacity: 1;
@@ -101,6 +101,8 @@ body.darkmode .moon-img {
   background: none;
   box-sizing: border-box;
   transition: border-color 0.3s;
+  position: relative;
+  z-index: 2;
 }
 .logo {
   position: fixed;
@@ -129,19 +131,48 @@ body.darkmode .logo-text {
   text-stroke: 1px #000;
 }
 
+.demo-section {
+  max-width: 900px;
+  margin: 60px auto 40px auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.demo-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: inherit;
+}
+
+.demo-frame {
+  width: 100%;
+  height: 600px;
+  border: 2px solid currentColor;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+/* Dark mode demo styles */
+body.darkmode .demo-frame {
+  box-shadow: 0 8px 32px rgba(255,255,255,0.1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .center-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 24px;
-  }
   .moon-img {
-    width: 220px;
-    margin-bottom: 24px;
+    width: 1200px;
+    left: -600px;
   }
-  .text-content {
-    align-items: center;
+  .demo-frame {
+    height: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .demo-frame {
+    height: 400px;
   }
 }
 
@@ -167,4 +198,23 @@ html.darkmode {
 html.darkmode * {
   background-color: #111 !important;
   color: #fff !important;
+}
+
+#toggle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-top: 45px;
+}
+
+.toggle-instruction {
+  font-size: 1.8rem;
+  color: inherit;
+  margin-top: 24px;
+  opacity: 0.9;
+  font-weight: 600;
+  text-align: center;
+  order: 2;
 }

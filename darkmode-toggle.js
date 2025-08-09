@@ -29,9 +29,7 @@
   const toggleBtn = document.createElement('div');
   toggleBtn.className = 'toggle-switch';
   toggleBtn.innerHTML = '<div class="toggle-thumb"></div>';
-  toggleBtn.style.position = 'fixed';
-  toggleBtn.style.top = '16px';
-  toggleBtn.style.right = '16px';
+  toggleBtn.style.position = 'relative';
   toggleBtn.style.zIndex = '99999';
   toggleBtn.style.width = '120px';
   toggleBtn.style.height = '68px';
@@ -46,13 +44,18 @@
   toggleBtn.style.alignItems = 'center';
   toggleBtn.style.justifyContent = 'flex-start';
   toggleBtn.style.paddingLeft = '4px';
+  toggleBtn.style.margin = '0 auto 20px auto';
   toggleBtn.addEventListener('click', toggleDarkMode);
 
   // Style the thumb
   const toggleThumb = toggleBtn.querySelector('.toggle-thumb');
   toggleThumb.style.width = '60px';
   toggleThumb.style.height = '60px';
-  toggleThumb.style.backgroundColor = '#fff';
+  toggleThumb.style.backgroundColor = 'transparent';
+  toggleThumb.style.backgroundImage = 'url("images/moon2.png")';
+  toggleThumb.style.backgroundSize = 'contain';
+  toggleThumb.style.backgroundRepeat = 'no-repeat';
+  toggleThumb.style.backgroundPosition = 'center';
   toggleThumb.style.borderRadius = '50%';
   toggleThumb.style.transition = 'transform 0.3s';
   toggleThumb.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
@@ -72,12 +75,24 @@
   `;
   document.head.appendChild(style);
 
-  document.addEventListener('DOMContentLoaded', function () {
-    document.body.appendChild(toggleBtn);
+  function initToggle() {
+    const toggleContainer = document.getElementById('toggle-container');
+    if (toggleContainer) {
+      toggleContainer.appendChild(toggleBtn);
+      // Add instruction text after the toggle
+      const instructionText = toggleContainer.querySelector('.toggle-instruction');
+      if (instructionText) {
+        toggleContainer.appendChild(instructionText);
+      }
+    } else {
+      document.body.appendChild(toggleBtn);
+    }
     // Restore previous state
     if (localStorage.getItem(STORAGE_KEY) === '1') {
       applyDarkMode();
       toggleBtn.classList.add('active');
     }
-  });
+  }
+
+  document.addEventListener('DOMContentLoaded', initToggle);
 })(); 
