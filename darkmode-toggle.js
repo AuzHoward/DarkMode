@@ -37,7 +37,7 @@
   toggleBtn.style.borderRadius = '34px';
   toggleBtn.style.cursor = 'pointer';
   toggleBtn.style.transition = 'background-color 0.3s';
-  toggleBtn.style.border = '1px solid #fff';
+  toggleBtn.style.border = '1px solid #000';
   toggleBtn.style.padding = '0';
   toggleBtn.style.boxSizing = 'border-box';
   toggleBtn.style.display = 'flex';
@@ -52,38 +52,36 @@
   toggleThumb.style.width = '60px';
   toggleThumb.style.height = '60px';
   toggleThumb.style.backgroundColor = 'transparent';
-  toggleThumb.style.backgroundImage = 'url("images/moon2.png")';
+  toggleThumb.style.backgroundImage = 'url("images/moon3.png")';
   toggleThumb.style.backgroundSize = 'contain';
   toggleThumb.style.backgroundRepeat = 'no-repeat';
   toggleThumb.style.backgroundPosition = 'center';
   toggleThumb.style.borderRadius = '50%';
-  toggleThumb.style.transition = 'transform 0.3s';
+  toggleThumb.style.transition = 'transform 0.3s, border-color 0.3s';
   toggleThumb.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+  toggleThumb.style.border = '1px solid #f8f6f2';
 
   // Active state styles
   const style = document.createElement('style');
   style.textContent = `
     .toggle-switch.active {
-      background-color: #4CAF50;
+      background-color: #000;
+      border-color: #000;
       justify-content: flex-end;
       padding-left: 0;
       padding-right: 4px;
     }
     .toggle-switch.active .toggle-thumb {
       transform: translateX(52px);
+      border-color: #111;
     }
   `;
   document.head.appendChild(style);
 
   function initToggle() {
-    const toggleContainer = document.getElementById('toggle-container');
-    if (toggleContainer) {
-      toggleContainer.appendChild(toggleBtn);
-      // Add instruction text after the toggle
-      const instructionText = toggleContainer.querySelector('.toggle-instruction');
-      if (instructionText) {
-        toggleContainer.appendChild(instructionText);
-      }
+    const togglePlaceholder = document.querySelector('.toggle-placeholder');
+    if (togglePlaceholder) {
+      togglePlaceholder.appendChild(toggleBtn);
     } else {
       document.body.appendChild(toggleBtn);
     }
