@@ -33,11 +33,11 @@
   toggleBtn.style.zIndex = '99999';
   toggleBtn.style.width = '120px';
   toggleBtn.style.height = '68px';
-  toggleBtn.style.backgroundColor = '#000';
+  toggleBtn.style.backgroundColor = '#2c2c2c';
   toggleBtn.style.borderRadius = '34px';
   toggleBtn.style.cursor = 'pointer';
   toggleBtn.style.transition = 'background-color 0.3s';
-  toggleBtn.style.border = '1px solid #000';
+  toggleBtn.style.border = '1px solid #2c2c2c';
   toggleBtn.style.padding = '0';
   toggleBtn.style.boxSizing = 'border-box';
   toggleBtn.style.display = 'flex';
@@ -65,8 +65,8 @@
   const style = document.createElement('style');
   style.textContent = `
     .toggle-switch.active {
-      background-color: #000;
-      border-color: #000;
+      background-color: #f8f6f2;
+      border-color: #f8f6f2;
       justify-content: flex-end;
       padding-left: 0;
       padding-right: 4px;
